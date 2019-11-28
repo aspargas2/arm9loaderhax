@@ -12,7 +12,7 @@ dir_source := source
 dir_build := build
 dir_out := ../$(dir_build)
 
-ASFLAGS := -mcpu=mpcore -mfloat-abi=hard
+ASFLAGS := -mcpu=mpcore
 CFLAGS  := -Wall -Wextra -MMD -MP -mthumb -mthumb-interwork $(ASFLAGS) -fno-builtin -std=c11 -Wno-main -O2 -flto -ffast-math
 LDFLAGS := -nostdlib
 
