@@ -2,7 +2,7 @@
 
 ## What this is
 
-An arm9loaderhax fork in <current year>.
+An arm9loaderhax fork in \<current year\>.
 
 ## Usage
 
