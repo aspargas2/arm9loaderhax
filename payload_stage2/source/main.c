@@ -11,10 +11,10 @@ void main(void)
     //Initialize sdcard and nand
     sdmmc_sdcard_init();
 
-    sdmmc_nand_readsectors(0x5C000, 22, (u8 *)0x08006000);
+    sdmmc_nand_readsectors(0x5C008, 30, (u8 *)0x08007000);
 
     flushCaches();
 
-    //Jump to secondary payload
-    ((void (*)())0x08006000)();
+    //Jump to tertiary payload
+    ((void (*)())0x08007000)();
 }
