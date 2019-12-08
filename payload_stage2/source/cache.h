@@ -24,5 +24,4 @@
 
 #include "types.h"
 
-void flushEntireDCache(void); //actually: "clean and flush"
-void flushEntireICache(void);
+void flushCaches(void);

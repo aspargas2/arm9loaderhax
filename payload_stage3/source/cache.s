@@ -22,15 +22,14 @@
 .arm
 .align 4
 
-.global flushCaches
-.type flushCaches, %function
-flushCaches:
-    @ Clean and flush data cache
-    @ Adpated from http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0155a/ch03s03s05.html ,
+.global flushEntireDCache
+.type flushEntireDCache, %function
+flushEntireDCache:
+    @ Adapted from http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0155a/ch03s03s05.html,
     @ and https://github.com/gemarcano/libctr9_io/blob/master/src/ctr_system_ARM.c#L39 as well
     @ Note: ARM's example is actually for a 8KB DCache (which is what the 3DS has)
-    @ Implemented in bootROM at address 0xffff0830
 
+    @ Implemented in bootROM at address 0xffff0830
     mov r1, #0                          @ segment counter
     outer_loop:
         mov r0, #0                      @ line counter
@@ -47,8 +46,12 @@ flushCaches:
         bne outer_loop
 
     mcr p15, 0, r1, c7, c10, 4              @ drain write buffer
+    bx lr
 
-    @ Flush instruction cache
-    mcr p15, 0, r1, c7, c5, 0
-
+.global flushEntireICache
+.type flushEntireICache, %function
+flushEntireICache:
+    @ Implemented in bootROM at address 0xffff0ab4
+    mov r0, #0
+    mcr p15, 0, r0, c7, c5, 0
     bx lr
